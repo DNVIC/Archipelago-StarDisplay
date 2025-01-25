@@ -94,7 +94,7 @@ namespace StarDisplay
         // Creates the error message and displays it.
         private static void ShowThreadExceptionDialog(string title, Exception e)
         {
-            string errorMsg = "An application error occurred. Please send this error to aglab3@gmail.com or @aglab23:\n\n";
+            string errorMsg = "An application error occurred. Please send this error to @DNVIC on discord:\n\n"; //i dont want people bugging aglab over this considering 90% of errors probably wont be aglabs fault
             errorMsg = errorMsg + e.Message + "\n\nStack Trace:\n" + e.StackTrace;
             ReportForm rf = new ReportForm(e);
             rf.init();

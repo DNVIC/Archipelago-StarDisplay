@@ -34,30 +34,32 @@
             // 
             // errorTextBox
             // 
-            this.errorTextBox.Location = new System.Drawing.Point(12, 25);
+            this.errorTextBox.Location = new System.Drawing.Point(24, 48);
+            this.errorTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.errorTextBox.Name = "errorTextBox";
             this.errorTextBox.ReadOnly = true;
-            this.errorTextBox.Size = new System.Drawing.Size(419, 314);
+            this.errorTextBox.Size = new System.Drawing.Size(834, 600);
             this.errorTextBox.TabIndex = 0;
             this.errorTextBox.Text = "";
             // 
             // infoLabel
             // 
             this.infoLabel.AutoSize = true;
-            this.infoLabel.Location = new System.Drawing.Point(12, 9);
+            this.infoLabel.Location = new System.Drawing.Point(24, 17);
+            this.infoLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.infoLabel.Name = "infoLabel";
-            this.infoLabel.Size = new System.Drawing.Size(419, 13);
+            this.infoLabel.Size = new System.Drawing.Size(732, 25);
             this.infoLabel.TabIndex = 1;
-            this.infoLabel.Text = "An application error occurred. Please send this error to aglab3@gmail.com or @agl" +
-    "ab23";
+            this.infoLabel.Text = "An application error occurred. Please send this error to @DNVIC on discord";
             // 
             // ReportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 351);
+            this.ClientSize = new System.Drawing.Size(886, 675);
             this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.errorTextBox);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReportForm";

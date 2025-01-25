@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Resolvers;
+using System.ComponentModel;
 
 namespace StarDisplay.Managers
 {
