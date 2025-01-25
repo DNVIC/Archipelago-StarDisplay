@@ -27,8 +27,8 @@ namespace StarDisplay
                 try
                 {
                     Version registryVersion = new Version((string)sdKey.GetValue("updatecfg"));
-                    if (registryVersion != null && (registryVersion > version))
-                        version = registryVersion;
+                    //if (registryVersion != null && (registryVersion > version))
+                    //    version = registryVersion;
                 }
                 catch(Exception) { }
             }

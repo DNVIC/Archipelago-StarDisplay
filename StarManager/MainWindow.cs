@@ -262,7 +262,7 @@ namespace StarDisplay
 
             try
             {
-                if (um.IsCompleted())
+                /*if (um.IsCompleted()) dont want people updating this as this is a fork and the update is for the non-fork
                 {
                     if (!isUpdateRequested && !um.IsUpdated())
                     {
@@ -281,7 +281,7 @@ namespace StarDisplay
                             }
                         });
                     }
-                }
+                }*/
             }
             catch (Exception) { }
 

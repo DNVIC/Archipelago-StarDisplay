@@ -139,6 +139,9 @@
   <data name="Octokit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\packages\Octokit.9.1.0\lib\netstandard2.0\Octokit.dll;System.Byte[], mscorlib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Archipelago_Multiclient_Net" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\packages\Archipelago.MultiClient.Net.6.5.0\lib\netstandard2.0\Archipelago.MultiClient.Net.dll;System.Byte[], mscorlib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="NetBin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\net\netbin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

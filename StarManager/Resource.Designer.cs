@@ -63,6 +63,16 @@ namespace StarDisplay {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Archipelago_Multiclient_Net {
+            get {
+                object obj = ResourceManager.GetObject("Archipelago_Multiclient_Net", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] CourierNew {
             get {
                 object obj = ResourceManager.GetObject("CourierNew", resourceCulture);

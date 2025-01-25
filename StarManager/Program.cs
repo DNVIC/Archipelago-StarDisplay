@@ -37,6 +37,8 @@ namespace StarDisplay
                 return Assembly.Load(Resource.Octokit);
             if (name == "Newtonsoft.Json")
                 return Assembly.Load(Resource.Newtonsoft_Json);
+            if (name == "Archipelago.MultiClient.Net")
+                return Assembly.Load(Resource.Archipelago_Multiclient_Net);
 
             return null;
         }

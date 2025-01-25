@@ -22,9 +22,10 @@ namespace StarDisplay.Managers
         public Dictionary<int, string> courseIndex;
         public Dictionary<int, bool> cannons;
 
-        public bool[] flags = [false, false, false, false, false];
+        public bool[] flags;
         public ArchipelagoManager(string ip, int port, string passwd, string slot)
         {
+            flags = new bool[5] { false, false, false, false, false };
             courseIndex = new Dictionary<int, string>
             {
                 { 8,  "Overworld"},
