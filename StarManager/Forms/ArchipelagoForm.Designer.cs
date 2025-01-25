@@ -1,6 +1,6 @@
 ﻿namespace StarDisplay
 {
-    partial class SyncLoginForm
+    partial class ArchipelagoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,15 +35,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.textBoxCategory = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // serverTextBox
             // 
             this.serverTextBox.Location = new System.Drawing.Point(112, 23);
-            this.serverTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.serverTextBox.Margin = new System.Windows.Forms.Padding(6);
             this.serverTextBox.Name = "serverTextBox";
             this.serverTextBox.Size = new System.Drawing.Size(154, 31);
             this.serverTextBox.TabIndex = 0;
@@ -52,16 +50,16 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(26, 79);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(6);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(304, 31);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "Password";
+            this.textBox2.Text = "Slot";
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(346, 75);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 44);
             this.button1.TabIndex = 2;
@@ -72,11 +70,11 @@
             // portTextBox
             // 
             this.portTextBox.Location = new System.Drawing.Point(346, 23);
-            this.portTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.portTextBox.Margin = new System.Windows.Forms.Padding(6);
             this.portTextBox.Name = "portTextBox";
             this.portTextBox.Size = new System.Drawing.Size(146, 31);
             this.portTextBox.TabIndex = 3;
-            this.portTextBox.Text = "25565";
+            this.portTextBox.Text = "38281";
             // 
             // label1
             // 
@@ -101,51 +99,29 @@
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(24, 179);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(466, 348);
+            this.richTextBox1.Size = new System.Drawing.Size(466, 402);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.Location = new System.Drawing.Point(26, 542);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(344, 31);
-            this.textBoxName.TabIndex = 8;
-            this.textBoxName.Text = "Net64 Name";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(384, 546);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(101, 29);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Net64";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.netCheckbox_CheckedChanged);
             // 
             // textBoxCategory
             // 
             this.textBoxCategory.Location = new System.Drawing.Point(26, 129);
-            this.textBoxCategory.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBoxCategory.Margin = new System.Windows.Forms.Padding(6);
             this.textBoxCategory.Name = "textBoxCategory";
             this.textBoxCategory.Size = new System.Drawing.Size(304, 31);
             this.textBoxCategory.TabIndex = 10;
-            this.textBoxCategory.Text = "Category";
+            this.textBoxCategory.Text = "Password";
+            this.textBoxCategory.TextChanged += new System.EventHandler(this.textBoxCategory_TextChanged);
             // 
-            // SyncLoginForm
+            // ArchipelagoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 596);
             this.Controls.Add(this.textBoxCategory);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -153,11 +129,11 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.serverTextBox);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.Name = "SyncLoginForm";
+            this.Margin = new System.Windows.Forms.Padding(6);
+            this.Name = "ArchipelagoForm";
             this.ShowIcon = false;
             this.Text = "Sync";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SyncLoginForm_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ArchipelagoForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,8 +148,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox textBoxCategory;
     }
 }

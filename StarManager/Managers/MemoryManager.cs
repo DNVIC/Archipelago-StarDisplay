@@ -732,6 +732,78 @@ namespace StarDisplay
             isInvalidated = true;
         }
 
+        public void WriteStarstoFile2(int numStars, Dictionary<int, bool> cannons)
+        {
+            byte[] stars = Process.ReadBytes(filesPtr[1], FileLength);
+            for (int i = 0; i < FileLength; i += 4)
+                Array.Reverse(stars, i, 4);
+
+            Console.WriteLine(string.Join("-", stars));
+            if (numStars > 7)
+            {
+                stars[8] = (byte)(127 + (cannons[8] ? 128 : 0)); //technically right now there's no way cannons[8] will ever exist, but contingencies
+                numStars -= 7;
+            }
+            else
+            {
+                stars[8] = (byte)((int)(Math.Pow(2, numStars)-1) + (cannons[8] ? 128 : 0));
+                numStars = 0;
+            }
+            for(int i = 12; i <= 36; i++)
+            {
+                if(numStars > 7)
+                {
+                    numStars -= 7;
+                    stars[i] = (byte)(127 + (cannons[i] ? 128 : 0));
+                } else if (numStars > 0)
+                {
+                    stars[i] = (byte)((int)(Math.Pow(2, numStars) - 1) + (cannons[i] ? 128 : 0));
+                    numStars = 0;
+                } else
+                {
+                    stars[i] = (byte)((cannons[i] ? 128 : 0));
+                }
+            }
+            
+            
+            FixStarCount(stars, 7);
+
+            for (int i = 0; i < FileLength; i += 4)
+                Array.Reverse(stars, i, 4);
+
+            Process.WriteBytes(filesPtr[1], stars);
+
+            //for (int i = 0; i < FileLength; i += 4)
+            //    Array.Reverse(stars, i, 4);
+
+
+        }
+        public void SetFile2Flags(bool[] flags)
+        {
+            byte[] file2Data = Process.ReadBytes(filesPtr[1], FileLength);
+            for (int i = 0; i < FileLength; i += 4)
+                Array.Reverse(file2Data, i, 4);
+            byte[] file1Data = Process.ReadBytes(filesPtr[0], FileLength);
+            for (int i = 0; i < FileLength; i += 4)
+                Array.Reverse(file1Data, i, 4);
+            file2Data[9] = file1Data[9];
+            file2Data[10] = file1Data[10];
+            byte importantData = file1Data[11];
+            for(int i = 0; i < 5; i++) // sets keys + caps to flags, which are set by archipelago. every other flag is copied over
+            {                          // because the assembly gets all flags from file 2, even though only 5 are randomized.
+                if (flags[i]) importantData |= (byte)(1 << (5-i)); else importantData &= (byte)(0b11111111 ^ (1 << (5-i)));
+            }
+            file2Data[11] = importantData;
+
+            FixStarCount(file2Data, 7);
+
+
+            for (int i = 0; i < FileLength; i += 4)
+                Array.Reverse(file2Data, i, 4);
+
+            Process.WriteBytes(filesPtr[1], file2Data);
+        }
+
         public void WriteToFile(byte[] data, int maxShown)
         {
             byte[] stars = data;

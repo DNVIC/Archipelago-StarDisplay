@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Threading;
 using Newtonsoft.Json;
 using System.Drawing.Imaging;
+using System.Diagnostics.Eventing.Reader;
 
 namespace StarDisplay
 {
@@ -27,6 +28,7 @@ namespace StarDisplay
         DownloadManager dm;
         SettingsManager sm;
         SyncLoginForm slf;
+        ArchipelagoForm af;
 
         System.Threading.Timer timer;
         
@@ -333,6 +335,30 @@ namespace StarDisplay
                 bool gmIsInvalidated = gm == null ? false : gm.CheckInvalidated();
                 bool dmIsInvalidated = dm == null ? false : dm.CheckInvalidated();
                 bool smIsInvalidated = false;
+
+                if (af != null && af.am != null) //dnvic bookmark
+                {
+                    if (af.am.file1Stars == null)
+                    {
+                        af.am.file1Stars = mm.Stars;
+                    }
+                    //sending locations to people
+                    if (!Enumerable.SequenceEqual(mm.Stars, af.am.file1Stars))
+                    {
+                        af.am.sendStars(mm.Stars);
+                        mm.SetFile2Flags(af.am.flags); //setting non-randomized flags to file 1's flags, since this also gets called every flag update
+                    }
+
+                    //recieving items from people
+                    if (af.am.numberItemsReceived != af.am.session.Items.AllItemsReceived.Count)
+                    {
+                        af.am.numberItemsReceived = af.am.session.Items.AllItemsReceived.Count;
+                        mm.WriteStarstoFile2(af.am.GetArchipelagoStars(), af.am.cannons);
+                        mm.SetFile2Flags(af.am.flags);
+                        af.UpdateText(af.am.flags);
+                    }
+                }
+
                 if (slf != null && slf.sm != null)
                     smIsInvalidated = slf.sm.CheckInvalidated();
 
@@ -1358,6 +1384,15 @@ namespace StarDisplay
                     MessageBox.Show("Failed to load image!", "Image Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+            }
+        }
+
+        private void archipelagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (af == null || af.isClosed)
+            {
+                af = new ArchipelagoForm();
+                af.Show();
             }
         }
 
