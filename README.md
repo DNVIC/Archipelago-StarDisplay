@@ -1,3 +1,8 @@
+# Archipelago Star Display
+This is a version of [Star Display](https://github.com/aglab2/SM64StarDisplay) which has been modified to allow connection to an archipelago server. It's not up to date on other stardisplay features, because merging all the changes from january 2024 (when i originally started this) was too complicated so i cbad to do it.
+
+Below this is the normal readme (though i think a bit outdated)
+
 # Star Display
 This is program to display acquired stars in casual playthrough! App reads game memory and depending on it displays Stars, Keys and 
 Caps automatically. The level you are at is highlighted with yellow rectangle. 
