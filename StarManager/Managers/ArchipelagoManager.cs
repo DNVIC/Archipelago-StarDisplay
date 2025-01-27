@@ -141,7 +141,7 @@ namespace StarDisplay.Managers
                         if (bits[j])
                         {
                             string locationName = courseIndex[i] + " Star " + (j+1);
-                            if(j+1 == 8)
+                            if(j == 7)
                             {  
                                 if(i == 12)
                                 {
@@ -155,6 +155,15 @@ namespace StarDisplay.Managers
                             //Console.WriteLine(session.Locations.GetLocationIdFromName("SM64 Romhack", locationName));
                             session.Locations.CompleteLocationChecks(session.Locations.GetLocationIdFromName("SM64 Romhack", locationName));
                         }
+                    }
+                }
+                else if (i == 37)
+                {
+                    BitArray bits = new BitArray(new byte[] { file1Stars[i] });
+                    if (bits[7])
+                    {
+                        string locationName = courseIndex[36] + " Cannon";
+                        session.Locations.CompleteLocationChecks(session.Locations.GetLocationIdFromName("SM64 Romhack", locationName));
                     }
                 }
                 if(i == 11) // flags
