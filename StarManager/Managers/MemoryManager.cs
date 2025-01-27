@@ -764,8 +764,8 @@ namespace StarDisplay
                     stars[i] = (byte)((cannons[i] ? 128 : 0));
                 }
             }
-            
-            
+            stars[37] = (byte)((cannons[37] ? 128 : 0)); // 4.5 memes
+
             FixStarCount(stars, 7);
 
             for (int i = 0; i < FileLength; i += 4)

@@ -83,7 +83,8 @@ namespace StarDisplay.Managers
                 { 33, false },
                 { 34, false },
                 { 35, false },
-                { 36, false }
+                { 36, false },
+                { 37, false }
             };
             Console.WriteLine(slot);
             session = ArchipelagoSessionFactory.CreateSession(ip, port);
@@ -129,7 +130,8 @@ namespace StarDisplay.Managers
         public void sendStars(byte[] Stars)
         {
             file1Stars = Stars;
-            for(int i = 0; i < file1Stars.Length; i++)
+            //PrintStars();
+            for (int i = 0; i < file1Stars.Length; i++)
             {
                 if(courseIndex.ContainsKey(i))
                 {
@@ -237,9 +239,9 @@ namespace StarDisplay.Managers
                             {
                                 cannons[12] = true;
                             }
-                            else if (courseNum == 36) {
-                                continue; //idk what happens when you get a cannon in secret 3 since its the last course id. dont want to chance it and 99% of hacks dont use this level anyhow.
-                            } 
+                            //else if (courseNum == 36) {
+                            //    continue; //idk what happens when you get a cannon in secret 3 since its the last course id. dont want to chance it and 99% of hacks dont use this level anyhow.
+                            //}  above was true but 4.5 does have a cannon in secret 3. also secret 3 cannon can be unlocked by getting >128 coins in C1 YEP
                             else
                             {
                                 cannons[courseNum + 1] = true;
