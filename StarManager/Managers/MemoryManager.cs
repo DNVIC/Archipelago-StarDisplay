@@ -92,6 +92,22 @@ namespace StarDisplay
         IntPtr starsCountPtr; //short
         IntPtr bank13RamStartPtr; // int 
 
+        IntPtr starCountAPPtr1;
+        IntPtr starCountAPPtr2;
+        IntPtr flagAPPtr;
+        IntPtr cannonAPPtr;
+        IntPtr capAPPtr;
+        IntPtr keyAPPtr1;
+        IntPtr keyAPPtr2;
+        IntPtr toad1APPtr;
+        IntPtr toad2APPtr;
+        IntPtr toad3APPtr;
+
+        IntPtr marioActionPtr;
+        IntPtr marioFloorPtr;
+        IntPtr marioFloorHeightPtr;
+        IntPtr marioYPosPtr;
+
         IntPtr marioObjectPtr;
         IntPtr netMagicPtr;
         IntPtr netCodePtr;
@@ -263,6 +279,22 @@ namespace StarDisplay
             spawnStatusPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B24B));
             igtigtPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B26A));
             levelSpawnPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B24A));
+
+            starCountAPPtr1 = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x35040));
+            starCountAPPtr2 = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x35074));
+            flagAPPtr = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x35198));
+            cannonAPPtr = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x35344));
+            capAPPtr = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x61FAC));
+            keyAPPtr1 = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x34DB0));
+            keyAPPtr2 = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x34DD4));
+            toad1APPtr = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x319B0));
+            toad2APPtr = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x319E4));
+            toad3APPtr = new IntPtr((long)(mm.ramPtrBase + 0x245000 + 0x31A18));
+
+            marioActionPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B17C));
+            marioFloorPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B1D8));
+            marioYPosPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B1B0));
+            marioFloorHeightPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B1E0));
 
             starsCountPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B218));
             bank13RamStartPtr = new IntPtr((long)(mm.ramPtrBase + 0x33B400 + 4 * 0x13));
@@ -738,7 +770,7 @@ namespace StarDisplay
             for (int i = 0; i < FileLength; i += 4)
                 Array.Reverse(stars, i, 4);
 
-            Console.WriteLine(string.Join("-", stars));
+            //Console.WriteLine(string.Join("-", stars));
             if (numStars > 7)
             {
                 stars[8] = (byte)(127 + (cannons[8] ? 128 : 0)); //technically right now there's no way cannons[8] will ever exist, but contingencies
@@ -905,6 +937,89 @@ namespace StarDisplay
         public void KillProcess()
         {
             Process.Kill();
+        }
+
+        public void ApplyPatch()
+        {
+            byte[] resettest = Process.ReadBytes(starCountAPPtr1, 4);
+            string s = BitConverter.ToString(resettest);
+            if (s != "01-00-04-24") //test to see if patch hasn't been applied, i.e. if you reset the game.
+            {
+                //Console.WriteLine(s);
+                Process.WriteBytes(starCountAPPtr1, new byte[] { 0x01, 0x00, 0x04, 0x24 });
+                Process.WriteBytes(starCountAPPtr2, new byte[] { 0x01, 0x00, 0x04, 0x24 });
+                Process.WriteBytes(flagAPPtr, new byte[] { 0x02, 0x00, 0x18, 0x24 });
+                Process.WriteBytes(cannonAPPtr, new byte[] { 0x02, 0x00, 0x0E, 0x24 });
+                Process.WriteBytes(capAPPtr, new byte[] { 0xF7, 0x9B, 0x0A, 0x08 });
+                Process.WriteBytes(keyAPPtr1, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+                Process.WriteBytes(keyAPPtr2, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+                Process.WriteBytes(toad1APPtr, new byte[] { 0x70, 0xDA, 0x09, 0x08 });
+                Process.WriteBytes(toad2APPtr, new byte[] { 0x7D, 0xDA, 0x09, 0x08 });
+                Process.WriteBytes(toad3APPtr, new byte[] { 0x8A, 0xDA, 0x09, 0x08 });
+            }
+        }
+        public int checkDeath()
+        {
+            byte[] action = Process.ReadBytes(marioActionPtr, 4);
+            string s = BitConverter.ToString(action);
+
+            var flrPtr = Process.ReadValue<int>(marioFloorPtr);
+            if (0 != flrPtr)
+            {
+                var surfPtr = new IntPtr((long)(mm.ramPtrBase + (ulong)(flrPtr & 0xffffff) + 1));
+                byte[] bytes = Process.ReadBytes(surfPtr, 2);
+
+                //Console.WriteLine($"flrptr:{bytes[1]}");
+                var afterFlrPtr = Process.ReadValue<int>(marioFloorPtr);
+                if (flrPtr == afterFlrPtr)
+                {
+                    float floorheight = Process.ReadValue<float>(marioFloorHeightPtr);
+                    float ypos = Process.ReadValue<float>(marioYPosPtr);
+                    //Console.WriteLine($"bytes:{bytes[0]}, {bytes[1]}");
+                    if (bytes[1] == 0x0A && ypos - floorheight < 2048f)
+                    {
+                        return 8; //death barrier
+                    }
+                    if (bytes[1] == 0x38 && ypos - floorheight < 2048f)
+                    {
+                        return 9; //wind
+                    }
+                }
+                    
+            }
+
+            switch (s)
+            {
+                case "12-13-02-00":
+                    return 1; //quicksand
+                case "E3-22-02-30":
+                    return 2; // whirlpool
+                case "17-13-02-00":
+                    return 3; //bubba
+                case "14-13-02-00":
+                    return 4; //suffocation/toxic gas
+                case "C4-32-00-30":
+                    return 5; //drown
+                case "13-13-02-00":
+                    return 6; //electrocution
+            }
+            if(Process.ReadValue<byte>(hpPtr + 1) == 0x00)
+            {
+                if(s == "38-03-02-00")
+                {
+                    return 0; //so electrocution gets the right death message
+                }
+                if(s == "B7-08-02-01") {
+                    return 7; //lava
+                }
+                return 10; //generic
+            }
+            return 0;
+        }
+
+        public void setDeath()
+        {
+            Process.WriteBytes(hpPtr, new byte[] { 0x00, 0x00 });
         }
     }
 }

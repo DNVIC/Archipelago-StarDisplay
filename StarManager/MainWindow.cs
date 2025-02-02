@@ -340,7 +340,8 @@ namespace StarDisplay
                 {
                     if (af.am.file1Stars == null)
                     {
-                        af.am.file1Stars = mm.Stars;
+                        af.am.sendStars(mm.Stars);
+                        mm.SetFile2Flags(af.am.flags); //setting non-randomized flags to file 1's flags, since this also gets called every flag update
                     }
                     //sending locations to people
                     if (!Enumerable.SequenceEqual(mm.Stars, af.am.file1Stars))
@@ -356,6 +357,18 @@ namespace StarDisplay
                         mm.WriteStarstoFile2(af.am.GetArchipelagoStars(), af.am.cannons);
                         mm.SetFile2Flags(af.am.flags);
                         af.UpdateText(af.am.flags);
+                    }
+                    //ram hack
+                    mm.ApplyPatch();
+                    int dc = mm.checkDeath();
+                    if (dc != 0)
+                    {
+                        af.am.PlayerDied(dc);
+                    }
+                    if(af.am.KillPlayer)
+                    {
+                        af.am.KillPlayer = false;
+                        mm.setDeath();
                     }
                 }
 
