@@ -960,6 +960,10 @@ namespace StarDisplay
         }
         public int checkDeath()
         {
+            if(GetMarioState() == null)
+            {
+                return 0; //prevent sending deaths on the title screen
+            }
             byte[] action = Process.ReadBytes(marioActionPtr, 4);
             string s = BitConverter.ToString(action);
 
