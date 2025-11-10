@@ -1,3 +1,5 @@
+# NOTE: THIS REPO IS NOT THE CURRENT CLIENT, AND WILL NOT WORK. IM KEEPING THIS UP FOR ARCHIVAL PURPOSES. PLEASE FOLLOW THE GUIDE [HERE](https://github.com/DNVIC/archipelago-sm64hacks/)
+
 # Archipelago Star Display
 This is a version of [Star Display](https://github.com/aglab2/SM64StarDisplay) which has been modified to allow connection to an archipelago server. It's not up to date on other stardisplay features, because merging all the changes from january 2024 (when i originally started this) was too complicated so i cbad to do it.
 
@@ -36,3 +38,4 @@ Star Display can sync your progress with other players online. You just need to 
  
 # Notes
  * This code was used as a part of RHDC star display. It is more feature rich but also more bloated compared to this original code. Bugs in that version of Star Display or any UX issues may not be related to current release.
+
